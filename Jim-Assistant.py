@@ -8,7 +8,7 @@ import datetime
 import time
 
 name = "Jim Assistant"
-version = "Alpha 2.0"
+version = "Alpha 3.0"
 listener = sr.Recognizer()
 r = sr.Recognizer()
 engine = pyttsx3.init()
@@ -190,6 +190,8 @@ if language = 1:
         en_commands()
         return
     
+talk("Thanks for using me, more changes will be available in the future.")
+talk("I am conscious that lot of things should be added to make this fully functional.\n Please be Patient")
 
 # Si lees esto eres un friki jajajaja
 # para q me voy a engañar yo tmb lo soy.
