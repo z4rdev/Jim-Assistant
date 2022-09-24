@@ -79,6 +79,55 @@ talk("Initialization Completed.")
 # Y si es en ingles que las preguntas y la voz sean en ingles.
 # A partir de aqui ya se está ejecutando el asistente al completo, y se empiezan a cargar los comandos!
 # Las funciones tienen que estar escritas debajo de esta linea
+def en_commands():
+    command = take_command()
+    print(command)
+    # TEMPORIZADOR
+    if 'timer' in command:
+        talk("Insert the time in minutes")
+        t = input()
+        countdown(int(t))
+    # MUSICA
+    if 'play' in command:
+        song = command.replace('play', '')
+        talk('Playing: ' + song)
+        pywhatkit.playonyt(song)
+    # HORA, DIA
+    elif 'time' in command:
+        time = datetime.datetime.now().strftime('%H:%M')
+        date = datetime.date.today()
+        talk("Today is: ")
+        talk(date)
+        talk("We are at: " + time)
+    # WIKIPEDIA
+    elif 'wikipedia' in command:
+        wikipedia.set_lang('en')
+        search = command.replace('wikipedia', '')
+        talk("Searching...")
+        info = wikipedia.summary(search, 3)
+        talk(info) 
+    # BUSCAR EN GOOGLE
+    elif 'chrome' in command:
+        search = command.replace('search in chrome', '')
+        try:
+            print("Searching...")
+            talk(pywhatkit.search(search))
+        except:
+            print("An error ocurred!")
+    # Buscar en google y que lo diga el asistente
+    elif 'google' in command:
+        search = command.replace('search in google', '')
+        try:
+            busqueda = pywhatkit.info(search, lines = 4)
+            talk(search)
+        except:
+            print("An error ocurred!")
+    # CHISTE
+    elif 'joke' in command:
+        talk(pyjokes.get_joke(language='en', category='all'))
+    else:
+        return
+
 def es_commands():
     command = take_command()
     print(command)
@@ -131,11 +180,16 @@ def es_commands():
         talk(pyjokes.get_joke(language='es', category='all'))
     else:
         return
-
-while True:
-    es_commands()
-  
-
+    
+if language = 0:
+    while True:
+        es_commands()
+        return
+if language = 1:
+    while True:
+        en_commands()
+        return
+    
 
 # Si lees esto eres un friki jajajaja
 # para q me voy a engañar yo tmb lo soy.
